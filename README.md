@@ -1,50 +1,38 @@
-# React + TypeScript + Vite
+# Trello-Style Todo Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a Trello-style todo board built with React, Redux, and Tailwind CSS. It allows users to organize their tasks into different columns and drag-and-drop tasks between columns.
 
-Currently, two official plugins are available:
+## How to Run the Project Locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Clone the repository:**
+   git clone https://github.com/your-username/Trello-Style-Todo-Board.git
+   cd Trello-Style-Todo-Board
 
-## Expanding the ESLint configuration
+2. Install Dependencies
+    npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. Start the development server:
+    npm run dev
+  
+4. Open the project in your browser 
+    http://localhost:5173
 
-- Configure the top-level `parserOptions` property like this:
+## Approach Taken
+ The project is built using the following technologies:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+  *React*: For building the user interface.
+  *Redux*: For state management.
+  *Tailwind CSS*: For styling the components.
+  *@dnd-kit/core*: For drag-and-drop functionality.
+  
+## Key Components
+  *App.tsx*: The main component that renders the header and the Kanban board.
+  *KanbanBoard.tsx*: The component that renders the columns and handles drag-and-drop events.
+  *Column.tsx*: The component that renders individual columns and their tasks.
+  *Task.tsx*: The component that renders individual tasks.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## State Management
+  The state of the tasks is managed using Redux. The taskSlice contains actions and reducers for changing the status of tasks when they are dragged and dropped between columns.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Limitations
+  Currently, the state of the tasks is not persisted. Adding local storage or a backend API to save and load tasks would improve the user experience.
