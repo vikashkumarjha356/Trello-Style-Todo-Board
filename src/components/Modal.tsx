@@ -12,30 +12,33 @@ const Modal = ({ isOpen, onClose, onSave, initialTitle = '', initialDescription 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
+    // useEffect to set the initial title and description when the modal is opened
     useEffect(() => {
         console.log('useEffect Triggered');
         setTitle(initialTitle);
         setDescription(initialDescription);
     }, [isOpen, initialTitle, initialDescription]);
 
+    // Function to handle the save action
     const handleSave = (e: React.FormEvent) => {
         e.preventDefault();
-        onSave(title, description);
-        setTitle('');
-        setDescription('');
-        onClose();
+        onSave(title, description); // Call the onSave function passed as a prop
+        setTitle(''); // Reset the title state
+        setDescription(''); // Reset the description state
+        onClose(); // Close the modal
     };
 
+    // If the modal is not open, return null to render nothing
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4">
                 <button onClick={onClose} className="float-right text-gray-500 hover:text-gray-700">
-                    &times;
+                    &times; {/* Close button */}
                 </button>
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                    {initialTitle ? 'Update Task' : 'Add New Task'}
+                    {initialTitle ? 'Update Task' : 'Add New Task'} {/* Conditional title */}
                 </h2>
                 <form onSubmit={handleSave}>
                     <div className="mb-4">

@@ -1,60 +1,53 @@
-
 import { useDispatch, useSelector } from 'react-redux';
-import { Column as ColumnType, Task, } from '../types';
+import { Column as ColumnType, Task } from '../types';
 import TaskCard from './TaskCard';
 import { useDroppable } from '@dnd-kit/core';
 import Modal from './Modal';
 import { useState } from 'react';
 import { addTask, updateTask } from '../utils/taskSlice';
 
-
 type ColumnProps = {
   column: ColumnType;
 };
-
-
 
 const Column = ({ column }: ColumnProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
   const dispatch = useDispatch();
   const initialTasks = useSelector((store: { tasks: { tasks: Task[] } }) => store.tasks.tasks);
+
+  // Function to handle adding a new task
   const handleAddNewTask = () => {
-    // Logic to add a new task
     console.log(`Add new task to ${column.title}`);
-    setCurrentTask(null);
-    setIsModalOpen(true);
+    setCurrentTask(null); // Reset current task to null
+    setIsModalOpen(true); // Open the modal
   };
 
-
+  // Function to handle editing an existing task
   const handleEditTask = (task: Task) => {
-    // Logic to edit a task
     console.log(`Edit task: ${task.title}, ${task.id}`);
-    setCurrentTask(task);
-    setIsModalOpen(true);
+    setCurrentTask(task); // Set the current task to the task being edited
+    setIsModalOpen(true); // Open the modal
   };
 
+  // Function to handle saving a task (either new or existing)
   const handleSaveTask = (title: string, description: string) => {
     if (currentTask) {
-      // Logic to update the existing task
-      console.log(`Update task: ${title}, ${description}`);
-      dispatch(updateTask({ ...currentTask, title, description }));
+      // If editing an existing task
+      dispatch(updateTask({ ...currentTask, title, description })); // Dispatch updateTask action
     } else {
-      // Logic to save the new task
-      console.log(`Save new task: ${title}, ${description}`);
-      dispatch(addTask({ id: Math.floor(Math.random() * 100).toString(), title, description, status: column.id }));
+      // If adding a new task
+      dispatch(addTask({ id: Math.floor(Math.random() * 100).toString(), title, description, status: column.id })); // Dispatch addTask action
     }
-    setIsModalOpen(false);
+    setIsModalOpen(false); // Close the modal
   };
 
-
-
+  // Setup droppable area for drag-and-drop functionality
   const { setNodeRef } = useDroppable({
     id: String(column.id),
   });
 
   return (
-
     <div className="flex flex-col w-80 md:w-1/3 p-4 rounded-lg bg-neutral-800">
       <h2 className="mb-4 font-semibold text-xl text-neutral-100">{column.title}</h2>
       <div ref={setNodeRef} className='flex flex-1 flex-col gap-4'>
@@ -76,8 +69,7 @@ const Column = ({ column }: ColumnProps) => {
         initialDescription={currentTask ? currentTask.description : ''}
       />
     </div>
+  );
+};
 
-  )
-}
-
-export default Column
+export default Column;
