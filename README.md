@@ -35,4 +35,5 @@ This project is a Trello-style todo board built with React, Redux, and Tailwind 
   The state of the tasks is managed using Redux. The taskSlice contains actions and reducers for changing the status of tasks when they are dragged and dropped between columns.
 
 ## Limitations
-  Currently, the state of the tasks is not persisted. Adding local storage or a backend API to save and load tasks would improve the user experience.
+  1. The json data is hardcoded as the data provided by dummy json api was not having distinguishable status
+  2. Currently, the state of the tasks is not persisted. Adding local storage or a backend API to save and load tasks would improve the user experience.
