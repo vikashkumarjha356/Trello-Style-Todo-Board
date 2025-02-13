@@ -2,7 +2,6 @@ import { useDraggable } from "@dnd-kit/core";
 import { Task } from "../types";
 import { deleteTask } from '../utils/taskSlice';
 import { useDispatch } from 'react-redux';
-import { useState } from "react";
 type TaskCardProps = {
     task: Task;
     onEdit: (task: Task) => void;
@@ -10,10 +9,8 @@ type TaskCardProps = {
 
 const TaskCard = ({ task, onEdit }: TaskCardProps) => {
     const dispatch = useDispatch();
-    const [isDraggingEnabled, setIsDraggingEnabled] = useState(false);
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: String(task.id),
-        disabled: isDraggingEnabled,
     });
 
     // console.log(listeners);
