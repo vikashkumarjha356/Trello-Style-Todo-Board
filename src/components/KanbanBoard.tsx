@@ -2,7 +2,7 @@ import Column from "./Column";
 import { Column as ColumnType } from "../types";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { useDispatch } from "react-redux";
-import { changeStatus } from "../utils/taskSlice";
+import { updateTask } from "../utils/taskSlice";
 
 const COLUMNS: ColumnType[] = [
     { id: 'Pending', title: 'To Do' },
@@ -18,7 +18,7 @@ const KanbanBoard: React.FC = () => {
         if (!over) return;
         const taskId = active.id as string;
         const newStatus = over.id as string;
-        dispatch(changeStatus({ id: taskId, status: newStatus }));
+        dispatch(updateTask({ id: taskId, status: newStatus }));
     }
 
     return (
