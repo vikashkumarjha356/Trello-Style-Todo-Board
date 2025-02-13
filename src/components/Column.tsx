@@ -55,8 +55,8 @@ const Column = ({ column }: ColumnProps) => {
 
   return (
 
-    <div className="flex flex-col w-full md:w-1/3 p-4 rounded-lg bg-neutral-800">
-      <h2 className="mb-4 font-semibold text-neutral-100">{column.title}</h2>
+    <div className="flex flex-col w-80 md:w-1/3 p-4 rounded-lg bg-neutral-800">
+      <h2 className="mb-4 font-semibold text-xl text-neutral-100">{column.title}</h2>
       <div ref={setNodeRef} className='flex flex-1 flex-col gap-4'>
         {initialTasks.filter(task => task.status === column.id).map(task => (
           <TaskCard key={task.id} task={task} onEdit={handleEditTask} />
