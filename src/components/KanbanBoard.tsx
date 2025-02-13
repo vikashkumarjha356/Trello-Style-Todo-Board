@@ -21,9 +21,11 @@ const KanbanBoard: React.FC = () => {
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
         if (!over) return;
+        // console.log(over);
         // console.log(typeof (active.id));
         const taskId = active.id as string;
         const newStatus = over.id as string;
+        // over.disabled = true;
         // console.log(active);
         // console.log(`Task ID: ${taskId}, New Status: ${newStatus}`);
         dispatch(changeStatus({ id: taskId, status: newStatus }));

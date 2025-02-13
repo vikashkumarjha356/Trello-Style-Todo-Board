@@ -16,6 +16,7 @@ const TaskCard = ({ task, onEdit }: TaskCardProps) => {
         disabled: isDraggingEnabled,
     });
 
+    // console.log(listeners);
     const style = transform
         ? {
             transform: `translate(${transform.x}px, ${transform.y}px)`,
@@ -40,9 +41,10 @@ const TaskCard = ({ task, onEdit }: TaskCardProps) => {
             <p className="mt-2 text-sm text-neutral-400">{task.description}</p>
             <div className="mt-4 flex justify-end gap-2">
                 <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        setIsDraggingEnabled(true);
+                    // style={{ pointerEvents: "auto" }}
+                    onPointerDown={(e) => e.stopPropagation()}
+                    onClick={() => {
+
                         onEdit(task)
                     }}
                     className="bg-yellow-500 text-white p-1 rounded hover:bg-yellow-600 transition-colors duration-300"
@@ -50,6 +52,7 @@ const TaskCard = ({ task, onEdit }: TaskCardProps) => {
                     Edit
                 </button>
                 <button
+                    onPointerDown={(e) => e.stopPropagation()}
                     onClick={() => handleDeleteTask(task.id)}
                     className="bg-red-500 text-white p-1 rounded hover:bg-red-600 transition-colors duration-300"
                 >
